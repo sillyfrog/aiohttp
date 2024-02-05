@@ -561,6 +561,7 @@ class HttpRequestParser(HttpParser[RawRequestMessage]):
         line = lines[0].decode("utf-8", "surrogateescape")
         try:
             method, path, version = line.split(" ", maxsplit=2)
+            version = version.strip()
         except ValueError:
             raise BadStatusLine(line) from None
 
