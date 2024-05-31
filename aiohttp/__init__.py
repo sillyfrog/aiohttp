@@ -1,5 +1,7 @@
 __version__ = "3.9.5"
 
+print("Patched aiohttp version: 3.9.5")
+
 from typing import TYPE_CHECKING, Tuple
 
 from . import hdrs as hdrs
