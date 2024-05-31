@@ -1,0 +1,22 @@
+diff --git a/aiohttp/_cparser.pxd b/aiohttp/_cparser.pxd
+index c2cd5a92..e089daeb 100644
+--- a/aiohttp/_cparser.pxd
++++ b/aiohttp/_cparser.pxd
+@@ -155,4 +155,5 @@ cdef extern from "../vendor/llhttp/build/llhttp.h":
+ 
+     void llhttp_set_lenient_headers(llhttp_t* parser, int enabled)
+     void llhttp_set_lenient_optional_cr_before_lf(llhttp_t* parser, int enabled)
++    void llhttp_set_lenient_optional_lf_after_cr(llhttp_t* parser, int enabled)
+     void llhttp_set_lenient_spaces_after_chunk_size(llhttp_t* parser, int enabled)
+diff --git a/aiohttp/_http_parser.pyx b/aiohttp/_http_parser.pyx
+index 3f28fbda..c5efbc8b 100644
+--- a/aiohttp/_http_parser.pyx
++++ b/aiohttp/_http_parser.pyx
+@@ -652,6 +652,7 @@ cdef class HttpResponseParser(HttpParser):
+         if not DEBUG:
+             cparser.llhttp_set_lenient_headers(self._cparser, 1)
+             cparser.llhttp_set_lenient_optional_cr_before_lf(self._cparser, 1)
++            cparser.llhttp_set_lenient_optional_lf_after_cr(self._cparser, 1)
+             cparser.llhttp_set_lenient_spaces_after_chunk_size(self._cparser, 1)
+ 
+     cdef object _on_status_complete(self):

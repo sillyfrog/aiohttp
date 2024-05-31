@@ -652,6 +652,7 @@ cdef class HttpResponseParser(HttpParser):
         if not DEBUG:
             cparser.llhttp_set_lenient_headers(self._cparser, 1)
             cparser.llhttp_set_lenient_optional_cr_before_lf(self._cparser, 1)
+            cparser.llhttp_set_lenient_optional_lf_after_cr(self._cparser, 1)
             cparser.llhttp_set_lenient_spaces_after_chunk_size(self._cparser, 1)
 
     cdef object _on_status_complete(self):
